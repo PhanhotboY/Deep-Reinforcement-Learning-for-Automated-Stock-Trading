@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Công cụ và Dữ liệu Phân tích kỹ thuật hàng đầu Việt Nam | VietstockFinance</title>
+    <!-- Fix for iOS Safari zooming bug -->
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta charset="utf-8" />
+    <link rel="shortcut icon" href="https://image.vietstock.vn/common/favicon.ico" type="image/x-icon">
+    <meta name="Description" content="Công cụ phân tích kỹ thuật chuyên sâu với dữ liệu trực tuyến và nhiều tính năng từ MetaStock, MetaTrader, AmiBroker...">
+    <meta name="keywords" content="Phân tích kỹ thuật,ptkt,phân tích kỹ thuật chứng khoán,biểu đồ phân tích kỹ thuật,biểu đồ phân tích kỹ thuật chứng khoán,đồ thị chứng khoán,đồ thị phân tích kỹ thuật,phân tích kỹ thuật online,phân tích kỹ thuật trực tuyến,công cụ phân tích kỹ thuật,đầu tư chứng khoán">
+
+    <meta property=fb:app_id content=314194798653804>
+    <meta http-equiv=content-language content=vi-VN>
+    <meta name=dc.created content=2010-01-01>
+    <meta name=dc.publisher content=vietstock.vn>
+    <meta name=dc.rights.copyright content=vietstock.vn>
+    <meta name=dc.creator.name content=vietstock.vn>
+    <meta name=dc.creator.email content=info@vietstock.vn>
+    <meta name=dc.identifier>
+    <meta name=AdsBot-Google content=index>
+    <meta name=googlebot content=index>
+    <meta name=googlebot-news content=index>
+    <meta name=googlebot-news content=snippet>
+    <meta property=og:type content=website>
+    <meta property=og:url content="https://stockchart.vietstock.vn/">
+    <meta property=og:image content=https://static1.vietstock.vn/image/2018/ta.vietstock.vn.share.jpg>
+    <meta property=og:site_name content=Vietstock>
+    <meta property=og:title content="Công cụ và Dữ liệu Phân tích kỹ thuật hàng đầu Việt Nam | VietstockFinance">
+    <meta property=og:description content="Công cụ phân tích kỹ thuật chuyên sâu với dữ liệu trực tuyến và nhiều tính năng từ MetaStock, MetaTrader, AmiBroker">
+    <meta name=twitter:card content=summary>
+    <meta name=twitter:site>
+    <meta name=twitter:title content="Công cụ và Dữ liệu Phân tích kỹ thuật hàng đầu Việt Nam | VietstockFinance">
+    <meta name=twitter:description content="Công cụ phân tích kỹ thuật chuyên sâu với dữ liệu trực tuyến và nhiều tính năng từ MetaStock, MetaTrader, AmiBroker">
+    <meta name=twitter:image content=https://static1.vietstock.vn/image/2018/ta.vietstock.vn.share.jpg>
+    <meta name=theme-color content=#01579B>
+    <meta name=msapplication-navbutton-color content=#01579B>
+    <meta name=apple-mobile-web-app-status-bar-style content=#01579B>
+    <meta name=apple-mobile-web-app-capable content=yes>
+
+    <link href="/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="/Content/font-awesome.min.css" rel="stylesheet" />
+    <link href="/Content/charting_library-master_V3/custom.css" rel="stylesheet" />
+    <script src="/Content/charting_library-master_V3/charting_library/charting_library.standalone.js"></script>
+    <script src="/Content/charting_library-master_V3/datafeeds/udf/dist/bundle.js"></script>
+
+    <script type="text/javascript">
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+        ga('create', 'UA-1460625-2', 'auto');
+        ga('require', 'displayfeatures');
+        ga('send', 'pageview');
+    </script>
+</head>
+<body style="margin:0px;">
+    
+
+<link href="/Content/charting_library-master_V3/fontawesome-free-5.13.1-web/css/all.min.css" rel="stylesheet" />
+<script type="text/javascript">
+    function getParameterByName(name) {
+        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+            results = regex.exec(location.search);
+        return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+    }
+    var widget;
+    var _lang = 'vi';
+    var session = '';
+    var isIframe = '0';
+    var isDark = '0';
+    function initOnReady() {
+
+        widget = window.tvWidget = new TradingView.widget({
+            fullscreen: true,
+            symbol: 'VNINDEX',
+            interval: '1D',
+            container: "tv_chart_container",
+            datafeed: new Datafeeds.UDFCompatibleDatafeed('https://api.vietstock.vn/tvnew'),
+            library_path: "/content/charting_library-master_V3/charting_library/",
+            locale: 'vi',
+            disabled_features: ["header_saveload", "header_screenshot"],
+            //enabled_features: ["study_templates"],
+            charts_storage_url: 'https://stockchart.vietstock.vn',
+            charts_storage_api_version: "1.3",
+            client_id: 'vst_trading_view',
+            user_id: 'vst_user',
+            theme: getParameterByName('theme'),
+            timezone: "Asia/Ho_Chi_Minh",
+            studies_overrides: {
+                "volume.volume.color.0": "#ff0000",
+                "volume.volume.color.1": "#008000"
+            }
+        });
+
+        widget.headerReady().then(function () {
+            if (isDark == 1) {
+                widget.changeTheme('dark');
+                //$("div.info").css("background-color", "#131722");
+                //$("div.login").css("background-color", "#131722");
+                $("div.login a").css("color", "#d1d4dc");
+                $("div.HuongDan a").css("color", "#d1d4dc");
+                $("#btnAccountInfo").css("color", "#d1d4dc");
+                $("div.zoom a").css("color", "#d1d4dc");
+                $(".spanBreak").css("color", "#434651");
+                $("div.zoomNotLogin a").css("color", "#d1d4dc");
+                $("div.zoomNotLoginVi a").css("color", "#d1d4dc");
+
+                $(".checkbox-label .ball").css("transform", "translateX(20px)");
+                $("#checkbox").prop("checked", true);
+
+            }
+            else {
+                widget.changeTheme('light');
+                //$("div.info").css("background-color", "#fff");
+                //$("div.login").css("background-color", "#fff");
+                $("div.login a").css("color", "#000");
+                $("div.HuongDan a").css("color", "#000");
+                $("#btnAccountInfo").css("color", "#000");
+                $("div.zoom a").css("color", "#000");
+                $(".spanBreak").css("color", "#e0e3eb");
+                $("div.zoomNotLogin a").css("color", "#000");
+                $("div.zoomNotLoginVi a").css("color", "#000");
+
+                $(".checkbox-label .ball").css("transform", "none");
+                $("#checkbox").prop("checked", false);
+            }
+
+            if (session == '') {
+                let iFrameDOM = $("#tv_chart_container iframe").contents();
+                if (_lang == 'en') {
+                    iFrameDOM.find(".toolbar-qqNP9X6e").children().children().children().children().children().children().children().append('<div class="group-MBOVGQRI" style="width:188px;"></div>');
+                }
+                else {
+                    iFrameDOM.find(".toolbar-qqNP9X6e").children().children().children().children().children().children().children().append('<div class="group-MBOVGQRI" style="width:255px;"></div>');
+                }
+
+                $('div.login').css("display", "block");
+                if (_lang == 'en') {
+                    $('div.zoomNotLogin').css("display", "block");
+                }
+                else {
+                    $('div.zoomNotLoginVi').css("display", "block");
+                }
+            }
+            else {
+                let iFrameDOM = $("#tv_chart_container iframe").contents();
+                if (_lang == 'en') {
+                    iFrameDOM.find(".toolbar-qqNP9X6e").children().children().children().children().children().children().children().append('<div class="group-MBOVGQRI" style="width:165px;"></div>');
+                }
+                else {
+                    iFrameDOM.find(".toolbar-qqNP9X6e").children().children().children().children().children().children().children().append('<div class="group-MBOVGQRI" style="width:195px;"></div>');
+                }
+
+                if (isIframe == 1) {
+                    $('div.zoom').css("display", "block");
+                }
+
+                $('div.info').css("display", "block");
+                $('div.flag').css("display", "block");
+                $('div.HuongDan').css("display", "block");
+                iFrameDOM.find('.saveString-XVd1Kfjg').css("display", "none");
+            }
+        });
+    };
+
+    window.addEventListener('DOMContentLoaded', initOnReady, false);
+</script>
+<div id="tv_chart_container"></div>
+
+        <div class="login" style="display: none">
+                <div class="lightdark">
+                    <input type="checkbox" class="checkbox" id="checkbox">
+                    <label for="checkbox" class="checkbox-label">
+                        <i class="fas fa-moon"></i>
+                        <i class="fas fa-sun"></i>
+                        <span class="ball"></span>
+                    </label>
+                </div>
+                    <a href="?lang=en" style="cursor:pointer;text-decoration:none;">
+                        <img src="//image.vietstock.vn/common/english.png" alt="English" style="height:22px;margin-bottom:3px;" />
+                    </a>
+                <a class="btnHuongDan" style="cursor:pointer;padding-right:5px;text-decoration:none;">Hướng dẫn</a><span class="spanBreak">|</span>
+            <a style="cursor:pointer;" class="btnlogin">Đăng nhập</a>
+        </div>
+
+
+
+<script src="https://www.google.com/recaptcha/api.js?onload=CaptchaCallback&render=explicit" async defer></script>
+
+<div id="register-form" class="modal" role="dialog">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center" role="document" style="max-width: 380px; padding: 10px;">
+            <div class="modal-content" style="padding: 5px;">
+                <a class="close-popup-icon-x" onclick="$('#register-form').modal('hide');">x</a>
+                <div class="text-center divtitleLogin" style="margin: 0;">
+                    Đăng k&#253; <b><span class="title-vietstock-color-red">Viet</span><span class="title-vietstock-color-blue">stock</span><span class="title-vietstock-color-red">ID</span></b>
+                </div>
+<form action="/Account/Register" data-ajax="true" data-ajax-method="POST" data-ajax-success="getResultRegister" id="form0" method="post"><input name="__RequestVerificationToken" type="hidden" value="Goo4Ixkmy7o03alLaYQ3NglmfG3V5-E5hyy7eDkiuEWHVkXWEoLzajOV76DhYkTCYcVM2F6tyChZjBjemtkgw7PlybRZ-EsUAMWOybEyO2c1" />                    <div class="input-group" style="margin-top: 10px;">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input class="form-control" data-val="true" data-val-length="Tên hiển thị không vượt quá 20 ký tự" data-val-length-max="200" data-val-required="Tên hiển thị là bắt buộc" id="DisplayName" name="DisplayName" placeholder="Tên hiển thị" type="text" value="" />
+
+                    </div>
+                    <div class="error-message"><span class="field-validation-valid" data-valmsg-for="DisplayName" data-valmsg-replace="true"></span></div>
+                    <div class="input-group" style="margin-top: 10px;">
+                        <span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                        <input class="form-control" data-val="true" data-val-email="Không đúng định dạng Email" data-val-required="Email là bắt buộc" id="Email" name="Email" placeholder="Email" type="text" value="" />
+                    </div>
+                    <div class="error-message"><span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span></div>
+                    <div class="input-group" style="margin-top: 10px;">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                        <input class="form-control" data-val="true" data-val-length="Mật khẩu phải có ít nhất 6 ký tự" data-val-length-max="100" data-val-length-min="6" data-val-required="Mật khẩu là bắt buộc" id="Password" name="Password" placeholder="Mật khẩu" type="password" />
+                    </div>
+                    <div class="error-message"><span class="field-validation-valid" data-valmsg-for="Password" data-valmsg-replace="true"></span></div>
+                    <div class="input-group" style="margin-top: 10px;">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                        <input class="form-control" data-val="true" data-val-equalto="Xác nhận mật khẩu và mật khẩu không giống nhau" data-val-equalto-other="*.Password" data-val-required="Xác nhận mật khẩu là bắt buộc" id="ConfirmPassword" name="ConfirmPassword" placeholder="Xác nhận mật khẩu" type="password" />
+                    </div>
+                    <div class="error-message"><span class="field-validation-valid" data-valmsg-for="ConfirmPassword" data-valmsg-replace="true"></span></div>
+                    <div class="clear-fix"></div>
+                    <div style="margin-top: 10px;">
+
+                        <input type="hidden" id="responseCaptchaPopup" name="responseCaptchaPopup" value="" />  
+                        <div id="g-recaptchaReg"></div> 
+                    </div>
+                    <div class="clear-fix"></div>
+                    <div class="success-message" id="register-success-message"></div>
+                    <div class="error-message" style="margin-top: 5px;" id="register-message"></div>
+                    <div class="clear-fix"></div>
+                    <div class="text-right" style="margin-top: 10px;">
+                        <button type="submit" id="btnRegister" disabled="disabled" class="btn btn-primary" value="Đăng k&#253;">Đăng k&#253; <i class="fa fa-arrow-circle-o-right"></i></button>
+                    </div>
+                    <div class="clear-fix"></div>
+                    <div>
+                        Bạn đ&#227; c&#243; t&#224;i khoản? <a href="#" id="btn-call-login-form" style="text-decoration: none;">Đăng nhập</a> tại đ&#226;y
+                    </div>
+</form>            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var CaptchaCallback = function () {
+        // bao nhiêu captcha thì đăng kí bấy nhiêu - 4.debug
+        grecaptcha.render('g-recaptchaReg', { 'sitekey': '6Le74NsZAAAAAMtZejIsYq9qQ_y8VmMDKO3IqJKY', 'callback': enableButtonPopup }); // 0
+        grecaptcha.render('g-recaptchaEmail', { 'sitekey': '6Le74NsZAAAAAMtZejIsYq9qQ_y8VmMDKO3IqJKY', 'callback': emailenableButton }); // 1
+        grecaptcha.render('g-recaptchaPass', { 'sitekey': '6Le74NsZAAAAAMtZejIsYq9qQ_y8VmMDKO3IqJKY', 'callback': resetenableButton }); // 2
+        grecaptcha.render('g-recaptchaLog', { 'sitekey': '6Le74NsZAAAAAMtZejIsYq9qQ_y8VmMDKO3IqJKY', 'callback': CaptchaLoginPopup }); // 3
+    };
+</script>
+
+<script>
+    function enableButtonPopup(response) { // data-callback
+        document.getElementById("btnRegister").disabled = false;
+        $("#responseCaptchaPopup").val(response);
+
+        console.log(response);
+    }
+</script>
+
+
+<div id="login-form" class="modal" role="dialog" style="padding-right: 17px;">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center" role="document" style="max-width: 500px;">
+            <div class="modal-content" style="padding: 5px;">
+                <a class="close-popup-icon-x" onclick="$('#login-form').modal('hide');">x</a>
+                <div class="text-center divtitleLogin" style="margin-bottom: 10px;">
+                    Đăng nhập <b><span class="title-vietstock-color-red">Viet</span><span class="title-vietstock-color-blue">stock</span><span class="title-vietstock-color-red">ID</span></b>
+                </div>
+                <div id="lbl-LoginPlease" style="display: none;">Vui l&#242;ng đăng nhập để sử dụng t&#237;nh năng n&#224;y</div>
+
+<form action="/Account/Login" data-ajax="true" data-ajax-method="POST" data-ajax-success="getResultLogin" id="form1" method="post"><input name="__RequestVerificationToken" type="hidden" value="tNdrnc9oDwSIvilK3Wz4hccIkq-OQTViYm_S-IzsqAZdpzqif0RhSQKH9-88wyvWVRDQuJC7x7FlY0fX-rdN0BZH73qUyDOhdeOM__tPCvk1" />                    <div id="content-login-form">
+                        <div id="content-login-form-input" style="padding: 5px; width: 100%;">
+                            <div class="input-group" style="margin-top: 2px;">
+                                <span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                                <input autocomplete="on" autofocus="autofocus" class="form-control" data-val="true" data-val-email="Không đúng định dạng Email" data-val-required="Email là bắt buộc" id="txtEmailLogin" name="Email" placeholder="Email" type="text" value="" />
+                            </div>
+                            <div class="error-message"><span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span></div>
+                            <div class="input-group" style="margin-top: 10px;">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                <input autocomplete="on" class="form-control" data-val="true" data-val-required="Mật khẩu là bắt buộc" id="txtPassword" name="Password" placeholder="Mật khẩu" type="password" />
+                            </div>
+                            <div class="error-message"><span class="field-validation-valid" data-valmsg-for="Password" data-valmsg-replace="true"></span></div>
+
+                            <div style="color: red; margin-top: 5px;" id="login-message"></div>
+
+                            <div class="clear-fix"></div>
+
+                            <div id="captchalogin" style="margin-top: 10px; display:none">
+                                <input type="hidden" id="responseCaptchaLoginPopup" name="responseCaptchaLoginPopup" value="" />
+                                <div id="g-recaptchaLog"></div>
+                            </div>
+
+                            <div style="display: flex; padding: 0; margin-top: 10px;">
+                                <div style="width: 50%; padding: 0;">
+                                    <input data-val="true" data-val-required="The Remember field is required." id="Remember" name="Remember" type="checkbox" value="true" /><input name="Remember" type="hidden" value="false" /> Ghi nhớ đăng nhập
+                                </div>
+                                <div class="text-right hidden-xs" style="width: 50%; padding: 0;"><a href="#" class="btnResetPassword">Qu&#234;n mật khẩu?</a></div>
+                            </div>
+                            <div class="visible-xs" style="padding: 0;"><a href="#" class="btnResetPassword">Qu&#234;n mật khẩu?</a></div>
+                            <div class="clear-fix"></div>
+                            <div class="hidden-xs">
+                                <a class="btnCallRegister" style="text-decoration: none; cursor: pointer;">Đăng k&#253;</a> t&#224;i khoản mới.
+                            </div>
+                        </div>
+                        <div id="content-login-form-button" style="padding: 5px;">
+                            <div style="margin-top: 2px;">
+                                <button type="submit" id="btnLoginAccount" class="btn btn-primary" value="Đăng nhập" style="width: 110px; margin-left: 2px;">Đăng nhập <i class="fa fa-arrow-circle-o-right"></i></button>
+                            </div>
+                            <div class="hidden-xs" style="font-size: 10px; margin: 2px 0;">Hoặc đăng nhập bằng</div>
+                            <div class="hidden-xs" style="margin-top: 2px;">
+                                <a class="btn btn-primary" href="/Account/LoginFacebook" style="width: 110px; margin-left: 2px;"><i class="fa fa-facebook"></i> facebook</a>
+                            </div>
+                            <div class="hidden-xs" style="margin-top: 5px;">
+                                <a class="btn btn-danger" href="/Account/LoginGooglePlus" style="width: 110px; margin-left: 2px;"><i class="fa fa-google"></i> Gmail</a>
+                            </div>
+                        </div>
+                        <div class="visible-xs" style="padding: 0px 5px;">
+                            <div style="font-size: 10px; margin: 2px 0;">Hoặc đăng nhập bằng</div>
+                            <div style="margin-top: 2px;">
+                                <a class="btn btn-primary" href="/Account/LoginFacebook" style="width: 110px; margin-left: 2px;"><i class="fa fa-facebook"></i> facebook</a>
+                                <a class="btn btn-danger" href="/Account/LoginGooglePlus" style="width: 110px; margin-left: 2px;"><i class="fa fa-google"></i> Gmail</a>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="visible-xs" style="margin: 5px 10px;">
+                        <a class="btnCallRegister" style="text-decoration: none; cursor: pointer;">Đăng k&#253;</a> t&#224;i khoản mới.
+                    </div>
+</form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function CaptchaLoginPopup(response) {
+        let error = $("#responseCaptchaLoginPopup").val();
+        $("#responseCaptchaLoginPopup").val(error + response);
+
+        console.log(response);
+    }
+</script>
+
+
+<div id="info-form" class="modal" role="dialog" style="padding-right: 17px;">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center" role="document" style="max-width: 500px;">
+            <div class="modal-content" style="padding: 5px;">
+                <a class="close-popup-icon-x" onclick="$('#info-form').modal('hide');">x</a>
+                <div class="text-center divtitleLogin" style="margin-bottom: 10px;">
+                    Hồ sơ c&#225; nh&#226;n <b><span class="title-vietstock-color-red">Viet</span><span class="title-vietstock-color-blue">stock</span><span class="title-vietstock-color-red">ID</span></b>
+                </div>
+
+
+
+                    <div class="error-message">Bạn cần phải đăng nhập</div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+<div id="change-password-form" class="modal" role="dialog" style="padding-right: 17px;">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center" role="document" style="max-width: 500px;">
+            <div class="modal-content" style="padding: 5px;">
+                <a class="close-popup-icon-x" onclick="$('#change-password-form').modal('hide');">x</a>
+                <div class="text-center divtitleLogin" style="margin-bottom: 10px;">
+                    Tạo mật khẩu mới <b><span class="title-vietstock-color-red">Viet</span><span class="title-vietstock-color-blue">stock</span><span class="title-vietstock-color-red">ID</span></b>
+                </div>
+                <div id="lbl-LoginPlease" style="display: none;">Vui l&#242;ng đăng nhập để sử dụng t&#237;nh năng n&#224;y</div>
+
+
+
+<form action="/Account/ChangePassword" data-ajax="true" data-ajax-method="POST" data-ajax-success="getResultChange" id="form2" method="post"><input name="__RequestVerificationToken" type="hidden" value="a3AHC9k5G-TgUxkvL51id-6L_w8XQ8fes9Jvs0R7KxHiCr6ScZ_vwqjfTtoNM6KAlgBK2jMRX3mXXsT_nnt02vxEy0mWL0ubUmSvlsG4ksU1" />                    <div class="input-group" style="margin-top: 10px;">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                        <input class="form-control" data-val="true" data-val-required="Mật khẩu là bắt buộc" id="Password" name="Password" placeholder="Mật khẩu" type="password" />
+                    </div>
+                    <div class="error-message"><span class="field-validation-valid" data-valmsg-for="Password" data-valmsg-replace="true"></span></div>
+                    <div class="input-group" style="margin-top: 10px;">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                        <input class="form-control" data-val="true" data-val-length="Mật khẩu phải có ít nhất 6 ký tự" data-val-length-max="100" data-val-length-min="6" data-val-required="Mật khẩu mới là bắt buộc" id="Password" name="NewPassword" placeholder="Mật khẩu mới" type="password" />
+                    </div>
+                    <div class="error-message"><span class="field-validation-valid" data-valmsg-for="NewPassword" data-valmsg-replace="true"></span></div>
+                    <div class="input-group" style="margin-top: 10px;">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                        <input class="form-control" data-val="true" data-val-equalto="Xác nhận mật khẩu và mật khẩu mới không giống nhau" data-val-equalto-other="*.NewPassword" data-val-required="Xác nhận mật khẩu là bắt buộc" id="ConfirmPassword" name="ConfirmPassword" placeholder="Xác nhận mật khẩu mới" type="password" />
+                    </div>
+                    <div class="error-message"><span class="field-validation-valid" data-valmsg-for="ConfirmPassword" data-valmsg-replace="true"></span></div>
+                    <div style="color: red; margin-top: 5px;" id="change-message"></div>
+                    <div style="margin: 5px;">
+                        <button type="submit" class="btn btn-primary" value="Lưu">Lưu</button>
+                    </div>
+</form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+<div id="confirm-again-form" class="modal" role="dialog" style="padding-right: 17px;">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center" role="document" style="max-width: 500px;">
+            <div class="modal-content" style="padding: 5px;">
+                <a class="close-popup-icon-x" onclick="$('#confirm-again-form').modal('hide');">x</a>
+                <div class="text-center divtitleLogin" style="margin-bottom: 10px;">
+                    Gửi lại email x&#225;c nhận <b><span class="title-vietstock-color-red">Viet</span><span class="title-vietstock-color-blue">stock</span><span class="title-vietstock-color-red">ID</span></b>
+                </div>
+
+
+
+<form action="/Account/ConfirmEmailAgain" data-ajax="true" data-ajax-method="POST" data-ajax-success="getResultConfirmAgain" id="form3" method="post"><input name="__RequestVerificationToken" type="hidden" value="4pvg7zSNW5PYgx6BwDNbV08HA_FGHSiXlN-QSxEZczcU5SkuLqT2oFUKUy1-sb2zR46kOJ3kKhIWsXSRxWo8lLX4Ow69UzljJzCU4ganhkE1" />                <div style="margin: 5px auto;">
+                    <div class="input-group" style="margin-top: 2px;">
+                        <span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                        <input autofocus="autofocus" class="form-control" data-val="true" data-val-email="Không đúng định dạng Email" data-val-required="Email là bắt buộc" id="txtEmailLogin" name="Email" placeholder="Email" type="text" value="" />
+                    </div>
+                    <div style="color: red;"><span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span></div>
+                    <div style="margin-top: 10px;">
+
+                        <input type="hidden" id="responseemailCaptcha" name="responseemailCaptcha" value="" />
+                        <div id="g-recaptchaEmail"></div>
+                    </div>
+                </div>
+                    <div style="color: red; margin-top: 5px;" id="confirm-again-message"></div>
+                    <div style="margin: 5px;">
+                        <button id="btnSendEmailconfirm" disabled="disabled" type="submit" class="btn btn-primary" value="Gửi">Gửi</button>
+                    </div>
+</form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<script>
+    function emailenableButton(response) {
+        document.getElementById("btnSendEmailconfirm").disabled = false;
+        $("#responseemailCaptcha").val(response);
+
+        console.log(response);
+
+    }
+</script>
+
+
+
+
+
+<div id="reset-form" class="modal" role="dialog" style="padding-right: 17px;">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center" role="document" style="max-width: 500px;">
+            <div class="modal-content" style="padding: 5px;">
+                <a class="close-popup-icon-x" onclick="$('#reset-form').modal('hide');">x</a>
+                <div class="text-center divtitleLogin" style="margin-bottom: 10px;">
+                    Qu&#234;n mật khẩu? <b><span class="title-vietstock-color-red">Viet</span><span class="title-vietstock-color-blue">stock</span><span class="title-vietstock-color-red">ID</span></b>
+                </div>
+                <div id="lbl-LoginPlease" style="display: none;">Vui l&#242;ng đăng nhập để sử dụng t&#237;nh năng n&#224;y</div>
+
+
+<form action="/Account/ResetPassword" data-ajax="true" data-ajax-method="POST" data-ajax-success="getResultReset" id="form4" method="post"><input name="__RequestVerificationToken" type="hidden" value="8Rtystu02XcJvSfezo0JQw0pETScqw4uwRfgj_QyssX8AkYnEucAYQnk_n4iUV7ypS98QNqyXw7cK_oaBdnlsYCUjLL1jXUq3KnRbP-Wj801" />                    <div id="content-login-form">
+                        <div id="content-login-form-input" style="padding: 5px; width: 100%;">
+                            <div class="input-group" style="margin-top: 2px;">
+                                <span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                                <input autofocus="autofocus" class="form-control" data-val="true" data-val-email="Không đúng định dạng Email" data-val-required="Email là bắt buộc" id="txtEmailLogin" name="Email" placeholder="Email" type="text" value="" />
+                            </div>
+                            <div class="error-message"><span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span></div>
+
+                            <div style="color: red; margin-top: 5px;" id="reset-message"></div>
+
+                            <div class="clear-fix"></div>
+                            <div style="margin-top: 10px;">
+
+                                <input type="hidden" id="responseresetCaptcha" name="responseresetCaptcha" value="" />
+                                <div id="g-recaptchaPass"></div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin: 5px;">
+                        <button id="btnSendEmailreset" disabled="disabled" type="submit" class="btn btn-primary" value="Gửi">Gửi</button>
+                    </div>
+</form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function resetenableButton(response) {
+        document.getElementById("btnSendEmailreset").disabled = false;
+        $("#responseresetCaptcha").val(response);
+
+        console.log(response);
+    }
+</script>
+
+
+<div id="divHuongDan" class="modal" role="dialog">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center" role="document" style="max-width: 800px;">
+            <div class="modal-content" style="padding: 5px;">
+                <a class="close-popup-icon-x" onclick="$('#divHuongDan').modal('hide');">x</a>
+                <div class="text-center divtitleLogin" style="margin-bottom: 10px;">
+                    Hướng dẫn sử dụng
+                </div>
+                <div class="scroll_bar">
+                    <h4>Giới thiệu</h4>
+                    <p>StockChart là công cụ phân tích kỹ thuật chuyên sâu với dữ liệu trực tuyến được cung cấp bởi Vietstock và các tính năng được cung cấp bởi TradingView. Người dùng sẽ có được trải nghiệm không hề kém cạnh các phần mềm phân tích chuyên nghiệp như MetaStock, MetaTrader, AmiBroker…</p>
+                    <iframe width="570" height="303" src="https://www.youtube.com/embed/x5HRzJdvmFc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    <h4>Đăng nhập tài khoản</h4>
+                    <p>Người dùng cần phải đăng nhập VietstockID để có thể sử dụng các tiện ích của StockChart. Người dùng có thể lựa chọn sử dụng email và mật khẩu. Tuy nhiên, một lựa chọn đơn giản hơn là đăng nhập bằng tài khoản Facebook hoặc Gmail.</p>
+                    <p><img src="/Content/images/DangNhap.PNG" alt="Đăng nhập" /></p>
+
+                    <h4>Phóng to/thu nhỏ đồ thị</h4>
+                    <p>Người dùng chỉ cần giữ nút Ctrl và đồng thời xoay bánh xe trên con trỏ chuột là có thể dễ dàng phóng to/thu nhỏ đồ thị. Ngoài ra, để có thể dịch chuyển đồ thị qua trái, qua phải thì người dùng chỉ cần click và giữ chuột trái lên khoảng trắng màn hình rồi dịch chuyển con trỏ chuột.</p>
+                    <h4>Tìm kiếm mã cổ phiếu, chứng quyền, chỉ số...</h4>
+                    <p>Khi muốn tìm kiếm mã cổ phiếu hay các đối tượng khác, người dùng gõ tên đối tượng cần tìm vào ô Tìm kiếm Mã giao dịch. Kết quả hiển thị sẽ là tất cả các cổ phiếu, chứng quyền, chỉ số… có chuỗi ký tự đó.</p>
+                    <img src="/Content/images/TimKiem1.png" alt="Tìm kiếm" />
+                    <img src="/Content/images/TimKiem2.png" alt="Tìm kiếm" />
+
+                    <h4>Thiết lập và lưu Bố cục biểu đồ</h4>
+                    <p>Sau khi vẽ các công cụ, chỉ báo lên đồ thị của một cổ phiếu, chỉ số… người dùng có thể lưu lại Bố cục biểu đồ (Layout) bằng cách nhấn vào nút Lưu trên góc phải bên trên của màn hình.</p>
+                    <img src="/Content/images/ThietLap.PNG" alt="Thiết lập" />
+
+                    <h4>Tải Bố cục biểu đồ</h4>
+                    <p>Sau khi đã lưu Bố cục biểu đồ (Layout), danh sách các mã sẽ được lưu không giới hạn. Khi người dùng muốn sử dụng Layout đã lưu thì nhấn vào nút mũi tên và chọn Tải Bố cục biểu đồ. Danh sách các mã đã lưu sẽ hiện ra. </p>
+                    <img src="/Content/images/TaiBoCuc1.PNG" alt="Tải bố cục" />
+                    <img src="/Content/images/TaiBoCuc2.PNG" alt="Tải bố cục" />
+
+                    <h4>Tạo một bản sao khác</h4>
+                    <p>Trong trường hợp bạn đang dùng một Layout của cổ phiếu A để phân tích cổ phiếu B và muốn lưu tên Layout này dưới tên cổ phiếu B thì có thể chọn Tạo 1 bản sao.</p>
+                    <img src="/Content/images/TaoBanSao1.PNG" alt="Tạo bản sao" />
+                    <img src="/Content/images/TaoBanSao2.PNG" alt="Tạo bản sao" />
+
+                    <h4>Sử dụng các chỉ báo (Indicators)</h4>
+                    <p>Khi muốn gọi và dùng các chỉ báo thì người dùng nhấn vào nút Fx ở trên thanh công cụ. Sau khi nhấn vào nút này thì danh sách các chỉ báo sẽ xuất hiện. Lưu ý, chế độ search thông minh đã được cài đặt sẵn nên nhà đầu tư có thể dễ dành tìm kiếm các chỉ báo mình muốn bằng cách đánh tên viết tắt (ví dụ: RSI, MACD, MFI…). </p>
+                    <img src="/Content/images/CacChiBao1.PNG" alt="Các chỉ báo" />
+                    <img src="/Content/images/CacChiBao2.PNG" alt="Các chỉ báo" />
+
+                    <h4>Cài đặt, tùy chỉnh trên biểu đồ </h4>
+                    <p>Chuột phải vào đồ thị và chọn Cài đặt, người dùng sẽ gọi ra được bảng Cài đặt biểu đồ để có thể dễ dàng tùy chỉnh màu sắc, cách hiển thị theo ý thích. </p>
+                    <img src="/Content/images/CaiDatBieuDo1.PNG" alt="Cài đặt biểu đồ" />
+                    <img src="/Content/images/CaiDatBieuDo2.PNG" alt="Cài đặt biểu đồ" />
+
+                    <h4>Thay đổi dạng biểu đồ </h4>
+                    <p>Người dùng nhấn vào nút Biểu đồ sẽ gọi ra được danh sách các biểu đồ sẵn có để chuyển đổi theo nhu cầu sử dụng và phân tích.</p>
+                    <img src="/Content/images/ThayDoiBieuDo1.PNG" alt="Thay đổi biểu đồ" />
+                    <img src="/Content/images/ThayDoiBieuDo2.PNG" alt="Thay đổi biểu đồ" />
+
+                    <h4>Ẩn/Hiện các sự kiện trên đồ thị</h4>
+                    <p>Đồ thị sẽ tự động hiển thị mặc định các sự kiện như chia cổ tức (ký hiệu bằng chữ D) trên đồ thị để người dùng có thể dễ dàng tham khảo nếu có nhu cầu. Khi muốn ẩn các thông tin này đi thì người dùng nhấn chuột phải vào khoảng trắng đồ thị và chọn Ẩn các Điểm trên Thanh.</p>
+                    <img src="/Content/images/SuKien.PNG" alt="Sự kiện" />
+
+                    <h4>Tùy chỉnh ngôn ngữ </h4>
+                    <p>Người dùng nhấn vào nút có hình lá cờ nước Anh ở góc phải bên trên màn hình để chuyển sang ngôn ngữ tiếng Anh. </p>
+                    <img src="/Content/images/NgonNgu.PNG" alt="Ngôn ngữ" />
+
+                    <h4>So sánh các cổ phiếu, chỉ số</h4>
+                    <p>Người dùng nhấn vào nút So sánh hoặc thêm Mã giao dịch sẽ hiện lên bảng nhập mã để điền thông tin cổ phiếu, chỉ số cần so sánh.</p>
+                    <img src="/Content/images/SoSanhCoPhieu.PNG" alt="So sánh cổ phiếu" />
+
+                    <h4>Thay đổi khung thời gian</h4>
+                    <p>Người dùng nhấn vào nút có chữ D sẽ hiện lên các khung thời gian (timeframe) hiện hữu để tùy ý lựa chọn.</p>
+                    <img src="/Content/images/KhungThoiGian.PNG" alt="Khung thời gian" />
+
+                    <h4>Sử dụng thanh công cụ</h4>
+                    <p>StockChart cung cấp một lượng lớn các thanh công cụ phục vụ nhu cầu đa dạng của giới đầu tư. Người dùng nhấn vào các nút mũi tên (nằm bên cạnh icon công cụ khi rê con trỏ chuột vào) và chọn công cụ cần dùng.</p>
+                    <img src="/Content/images/ThanhCongCu.PNG" alt="Thanh công cụ" />
+
+                    <h4>Quản lý danh sách đối tượng</h4>
+                    <p>StockChart cho phép bạn theo dõi các đối tượng/chỉ báo/công cụ đang hiện diện trên đồ thị. Việc theo dõi này rất cần thiết để người dùng có thể thêm các đối tượng còn thiếu hoặc bỏ đi các công cụ bị thừa. Nút Hiện danh sách đối tượng nằm dưới cùng bên tay trái của màn hình.</p>
+                    <img src="/Content/images/DanhSachDoiTuong.PNG" alt="Danh sách đối tượng" />
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .scroll_bar {
+        height: 500px;
+        overflow-y: scroll;
+    }
+
+        .scroll_bar img {
+            max-width: 100%;
+            height: auto;
+            display: flex;
+            margin: auto;
+        }
+
+        .scroll_bar::-webkit-scrollbar {
+            width: 1px;
+        }
+
+        .scroll_bar::-webkit-scrollbar-thumb {
+            background-color: #a9acb0;
+            outline: 1px solid #a9acb0;
+        }
+</style>
+
+<script src="/bundles/jslogin?v=8EQsFP_N-mDBEIgAAGW60s2mdSrKumbK5YJsmL7qpio1"></script>
+
+
+
+<script>
+    $(document).ready(
+        function () {
+            $('#checkbox').change(function () {
+                if ($(this).is(':checked')) {
+                    widget.changeTheme('dark');
+                    //$("div.info").css("background-color", "#131722");
+                    //$("div.login").css("background-color", "#131722");
+                    $("div.login a").css("color", "#d1d4dc");
+                    $("div.HuongDan a").css("color", "#d1d4dc");
+                    $("#btnAccountInfo").css("color", "#d1d4dc");
+                    $("div.zoom a").css("color", "#d1d4dc");
+                    $(".spanBreak").css("color", "#434651");
+                    $("div.zoomNotLogin a").css("color", "#d1d4dc");
+                    $("div.zoomNotLoginVi a").css("color", "#d1d4dc");
+
+                    $(".checkbox-label .ball").css("transform", "translateX(20px)");
+                    setCookie('CookieIsDark', '1', '7');
+                }
+                else {
+                    widget.changeTheme('light');
+                    //$("div.info").css("background-color", "#fff");
+                    //$("div.login").css("background-color", "#fff");
+                    $("div.login a").css("color", "#000");
+                    $("div.HuongDan a").css("color", "#000");
+                    $("#btnAccountInfo").css("color", "#000");
+                    $("div.zoom a").css("color", "#000");
+                    $(".spanBreak").css("color", "#e0e3eb");
+                    $("div.zoomNotLogin a").css("color", "#000");
+                    $("div.zoomNotLoginVi a").css("color", "#000");
+
+                    $(".checkbox-label .ball").css("transform", "none");
+                    setCookie('CookieIsDark', '0', '7');
+                }
+            });
+
+
+            function setCookie(key, value, expiry) {
+                var expires = new Date();
+                expires.setTime(expires.getTime() + (expiry * 24 * 60 * 60 * 1000));
+                document.cookie = key + '=' + value + ';expires=' + expires.toUTCString();
+            }
+
+            function getCookie(key) {
+                var keyValue = document.cookie.match('(^|;) ?' + key + '=([^;]*)(;|$)');
+                return keyValue ? keyValue[2] : null;
+            }
+
+            function eraseCookie(key) {
+                var keyValue = getCookie(key);
+                setCookie(key, keyValue, '-1');
+            }
+        }
+    );
+</script>
+</body>
+</html>

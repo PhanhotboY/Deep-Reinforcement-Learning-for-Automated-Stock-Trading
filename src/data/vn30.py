@@ -70,10 +70,11 @@ processed_full = pd.DataFrame(combination, columns=["date", "tic"]).merge(
 processed_full = processed_full[processed_full["date"].isin(processed["date"])]
 processed_full = processed_full.sort_values(["date", "tic"], ignore_index=True)
 
-processed_full = processed_full.dropna(axis=0)
+na_dates = processed_full[processed_full.isna().any(axis=1)].date.unique()
+processed_full = processed_full[~processed_full["date"].isin(na_dates)]
 processed_full = processed_full.fillna(0)
 
-print(processed_full.tail())
+print(processed_full.tic.value_counts())
 
 train = data_split(processed_full, TRAIN_START_DATE, TRAIN_END_DATE)
 trade = data_split(processed_full, TRADE_START_DATE, TRADE_END_DATE)

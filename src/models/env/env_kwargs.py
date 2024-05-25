@@ -1,13 +1,21 @@
+import sys
+
+sys.path.append("/mnt/d/workspace/ai/rl4ast/")
+
 import pandas as pd
 
 from finrl.meta.env_stock_trading.env_stocktrading import StockTradingEnv
 from finrl.agents.stablebaselines3.models import DRLAgent, DRLEnsembleAgent
-from stable_baselines3.common.logger import configure
-from finrl import config_tickers
 from finrl.main import check_and_make_directories
 from finrl.config import INDICATORS, RESULTS_DIR
 
-TRAINED_MODEL_DIR = "src/models/trained_models"
+from configs.tickers import (
+    TRAINED_MODEL_DIR,
+    TRAIN_START_DATE,
+    TRAIN_END_DATE,
+    TRADE_START_DATE,
+    TRADE_END_DATE,
+)
 
 check_and_make_directories([TRAINED_MODEL_DIR])
 
@@ -37,7 +45,7 @@ num_stock_shares = [0] * stock_dimension
 
 env_kwargs = {
     "hmax": 100,
-    "initial_amount": 1000000,
+    "initial_amount": 10_000_000_000,
     "buy_cost_pct": 0.0015,
     "sell_cost_pct": 0.0015,
     "state_space": state_space,
@@ -66,11 +74,6 @@ e_train_gym = StockTradingEnv(df=train, **env_kwargs_gym)
 
 env_train, _ = e_train_gym.get_sb_env()
 print(type(env_train))
-
-TRAIN_START_DATE = "2012-04-01"
-TRAIN_END_DATE = "2023-03-31"
-TEST_START_DATE = "2023-04-01"
-TEST_END_DATE = "2024-04-01"
 
 rebalance_window = 63  # rebalance_window is the number of days to retrain the model
 validation_window = 63  # validation_window is the number of days to do validation and trading (e.g. if validation_window=63, then both validation and trading period will be 63 days)
@@ -103,9 +106,9 @@ SAC_model_kwargs = {
 }
 
 timesteps_dict = {
-    "a2c": 50_000,
-    "ppo": 50_000,
-    "ddpg": 50_000,
-    "td3": 50_000,
-    "sac": 50_000,
+    "a2c": 10_000,
+    "ppo": 10_000,
+    "ddpg": 10_000,
+    "td3": 10_000,
+    "sac": 10_000,
 }

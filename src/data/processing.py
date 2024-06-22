@@ -1,6 +1,7 @@
 import sys
+import os
 
-sys.path.append("/mnt/d/workspace/ai/rl4ast/")
+sys.path.append(os.getcwd())
 
 import pandas as pd
 
@@ -41,8 +42,8 @@ for ticker in VN_HIGH_VOL_TICKER:
 
     df_raw = pd.concat([df_raw, df_ticker], ignore_index=True)
 
-print(df_raw.tail())
 df_raw.sort_values(["date", "tic"], ignore_index=True, inplace=True)
+print(type(df_raw["close"][0]))
 
 fe = FeatureEngineer(
     use_technical_indicator=True,

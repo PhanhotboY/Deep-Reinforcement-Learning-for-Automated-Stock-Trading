@@ -1,6 +1,6 @@
 import sys
 
-sys.path.append("/mnt/d/workspace/ai/rl4ast/")
+sys.path.append("/home/phanhotboy/workspace/ai/rl4ast/")
 
 import pandas as pd
 

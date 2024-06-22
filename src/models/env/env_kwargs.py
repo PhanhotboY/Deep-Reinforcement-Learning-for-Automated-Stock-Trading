@@ -1,11 +1,13 @@
 import sys
+import os
 
-sys.path.append("/mnt/d/workspace/ai/rl4ast/")
+sys.path.append(os.getcwd())
 
 import pandas as pd
 
 from finrl.meta.env_stock_trading.env_stocktrading import StockTradingEnv
 from finrl.agents.stablebaselines3.models import DRLAgent, DRLEnsembleAgent
+from stable_baselines3.common.logger import configure
 from finrl.main import check_and_make_directories
 from finrl.config import INDICATORS, RESULTS_DIR
 
